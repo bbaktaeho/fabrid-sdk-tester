@@ -8,4 +8,7 @@ export const Env = load({
   CERTIFICATE_AUTHORITIES: String,
   CLIENT_ID: String,
   AFFILIATION: String,
+  CHANNEL: String,
+  CHAINCODE_NAME: String,
+  AS_LOCALHOST: Boolean,
 });
