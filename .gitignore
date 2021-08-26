@@ -4,3 +4,5 @@ build
 
 wallet
 node_modules
+
+*.id
