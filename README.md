@@ -31,6 +31,12 @@ AS_LOCALHOST=false
 
 ### Execute
 
-```zsh
- npm run dev
-```
+1. install packages
+
+    ```zsh
+    npm install
+    ```
+2. run
+    ```zsh
+    npm run dev
+    ```
