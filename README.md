@@ -9,7 +9,7 @@
 #### dotenv (ex)
 
 ```
-CCP_PATH=/Users/leo/Dev/repo/medium-fabric-test/mdl-debug/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.json
+CCP_PATH=<path to connection profile>
 MSP_ID=Org1MSP
 ADMIN_ID=admin
 ADMIN_SECRET=adminpw
