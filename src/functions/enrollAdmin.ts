@@ -2,14 +2,17 @@ import FabricCAServices from "fabric-ca-client";
 import { Wallets, X509Identity } from "fabric-network";
 import fs from "fs";
 import path from "path";
-import { ENV } from "./config";
+import { Env } from "../config";
+import { IEnv } from "../interfaces/IEnv";
 
-export async function enrollAdmin() {
-  const ccpPath = ENV.CCP_PATH;
-  const enrollmentID = ENV.ENROLLMENT_ID;
-  const certificateAuthorities = ENV.CERTIFICATE_AUTHORITIES;
-  const enrollmentSecret = ENV.ENROLLMENT_SECRET;
-  const mspId = ENV.MSP_ID;
+export async function enrollAdmin({
+  ccpPath,
+  certificateAuthorities,
+  mspId,
+  adminId,
+}: IEnv) {
+  const enrollmentID = adminId;
+  const enrollmentSecret = Env.ADMIN_SECRET;
 
   try {
     // load the network configuration

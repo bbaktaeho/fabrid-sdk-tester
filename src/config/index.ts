@@ -1,9 +1,11 @@
 import { load } from "ts-dotenv";
 
-export const ENV = load({
+export const Env = load({
   CCP_PATH: String,
   MSP_ID: String,
-  ENROLLMENT_ID: String,
-  ENROLLMENT_SECRET: String,
+  ADMIN_ID: String,
+  ADMIN_SECRET: String,
   CERTIFICATE_AUTHORITIES: String,
+  CLIENT_ID: String,
+  AFFILIATION: String,
 });
