@@ -42,8 +42,9 @@ export async function query({ ccpPath }: IEnv, asLocalhost: boolean) {
     const contract = network.getContract(chaincodeName);
 
     // todo: your ctor of contract
-    const args = { args: ["-", "0x5e11a44C6139f3D6aD295e7Ec706fe362f42518f"] };
+    const args = { args: ["-", Env.ACCOUNT] };
     const jsonArgs = JSON.stringify(args);
+
     const result = await contract.evaluateTransaction(
       "AdminOperations",
       "GetBalanceOf",

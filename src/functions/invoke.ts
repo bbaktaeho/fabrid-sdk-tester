@@ -45,7 +45,7 @@ export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
     const args = {
       args: [
         "-",
-        "0x5e11a44C6139f3D6aD295e7Ec706fe362f42518f",
+        Env.ACCOUNT,
         "100000000000000000000000000000",
       ],
     };
@@ -55,6 +55,7 @@ export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
       "SetBalanceOf",
       jsonArgs
     );
+
     console.log(`Transaction has been submitted`);
     await gateway.disconnect();
   } catch (error) {

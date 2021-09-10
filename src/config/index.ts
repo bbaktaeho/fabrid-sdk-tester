@@ -11,4 +11,5 @@ export const Env = load({
   CHANNEL: String,
   CHAINCODE_NAME: String,
   AS_LOCALHOST: Boolean,
+  ACCOUNT: String,
 });
