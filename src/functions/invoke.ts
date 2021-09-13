@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { IEnv } from "../interfaces/IEnv";
 import { Env } from "../config";
+import { formatAddress } from "../utils/formatAddress";
 
 export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
   const clientId = Env.CLIENT_ID;
@@ -41,13 +42,10 @@ export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
     // Get the contract from the network.
     const contract = network.getContract(chaincodeName);
 
+    const address = formatAddress(Env.ACCOUNT);
     // todo: your ctor of contract
     const args = {
-      args: [
-        "-",
-        Env.ACCOUNT,
-        "100000000000000000000000000000",
-      ],
+      args: ["-", address, "1" + "0".repeat(21)],
     };
     const jsonArgs = JSON.stringify(args);
     await contract.submitTransaction(
