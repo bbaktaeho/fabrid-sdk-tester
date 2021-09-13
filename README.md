@@ -23,6 +23,9 @@ CHAINCODE_NAME=<chaincode id>
 
 # check the etc/hosts
 AS_LOCALHOST=false
+
+# ACCOUNT is for erc-20 token
+ACCOUNT=9261cabB98BFA4C09C069ce6CbAbc5f2696922F5
 ```
 
 - `AS_LOCALHOST` [docs](https://hyperledger.github.io/fabric-sdk-node/release-1.4/tutorial-discovery-fabric-network.html)
