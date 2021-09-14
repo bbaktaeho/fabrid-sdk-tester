@@ -1,23 +1,21 @@
-import { Env } from "./config";
+import { config } from "./config";
+import { AdminOperations } from "./functions/adminOperations";
 import { enrollAdmin } from "./functions/enrollAdmin";
-import { invoke } from "./functions/invoke";
-import { sleep } from "./utils/sleep";
-import { query } from "./functions/query";
 import { registerUser } from "./functions/registerUser";
+import { IEnv } from "./interfaces/IEnv";
 
-const ccpPath = Env.CCP_PATH;
-const certificateAuthorities = Env.CERTIFICATE_AUTHORITIES;
-const mspId = Env.MSP_ID;
-const adminId = Env.ADMIN_ID;
-const asLocalhost = Env.AS_LOCALHOST;
+const DEFAULT_ENV: IEnv = {
+  adminId: config.ADMIN_ID,
+  ccpPath: config.CCP_PATH,
+  certificateAuthorities: config.CERTIFICATE_AUTHORITIES,
+  mspId: config.MSP_ID,
+};
+const AS_LOCALHOST = config.AS_LOCALHOST;
 
 (async () => {
-  await enrollAdmin({ ccpPath, adminId, certificateAuthorities, mspId });
-  await registerUser({ ccpPath, adminId, certificateAuthorities, mspId });
-  await invoke(
-    { ccpPath, adminId, certificateAuthorities, mspId },
-    asLocalhost
-  );
-  await sleep(2);
-  await query({ ccpPath, adminId, certificateAuthorities, mspId }, asLocalhost);
+  await enrollAdmin(DEFAULT_ENV);
+  await registerUser(DEFAULT_ENV);
+
+  console.log("-".repeat(10) + "AdminOperations" + "-".repeat(10));
+  await AdminOperations(DEFAULT_ENV, AS_LOCALHOST);
 })();

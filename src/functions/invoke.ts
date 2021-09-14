@@ -2,13 +2,13 @@ import { Gateway, Wallets } from "fabric-network";
 import path from "path";
 import fs from "fs";
 import { IEnv } from "../interfaces/IEnv";
-import { Env } from "../config";
+import { config } from "../config";
 import { formatAddress } from "../utils/formatAddress";
 
 export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
-  const clientId = Env.CLIENT_ID;
-  const channel = Env.CHANNEL;
-  const chaincodeName = Env.CHAINCODE_NAME;
+  const clientId = config.CLIENT_ID;
+  const channel = config.CHANNEL;
+  const chaincodeName = config.CHAINCODE_NAME;
 
   try {
     const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
@@ -42,7 +42,7 @@ export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
     // Get the contract from the network.
     const contract = network.getContract(chaincodeName);
 
-    const address = formatAddress(Env.ACCOUNT);
+    const address = formatAddress(config.ACCOUNT);
     // todo: your ctor of contract
     const args = {
       args: ["-", address, "1" + "0".repeat(21)],

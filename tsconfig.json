@@ -9,7 +9,8 @@
     "noUnusedLocals": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noImplicitThis": false
   },
   "include": ["src/"],
   "exclude": ["src/protos/"]

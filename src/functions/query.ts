@@ -2,12 +2,12 @@ import { Gateway, Wallets } from "fabric-network";
 import path from "path";
 import fs from "fs";
 import { IEnv } from "../interfaces/IEnv";
-import { Env } from "../config";
+import { config } from "../config";
 
 export async function query({ ccpPath }: IEnv, asLocalhost: boolean) {
-  const clientId = Env.CLIENT_ID;
-  const channel = Env.CHANNEL;
-  const chaincodeName = Env.CHAINCODE_NAME;
+  const clientId = config.CLIENT_ID;
+  const channel = config.CHANNEL;
+  const chaincodeName = config.CHAINCODE_NAME;
 
   try {
     const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
@@ -42,7 +42,7 @@ export async function query({ ccpPath }: IEnv, asLocalhost: boolean) {
     const contract = network.getContract(chaincodeName);
 
     // todo: your ctor of contract
-    const args = { args: ["-", Env.ACCOUNT] };
+    const args = { args: ["-", config.ACCOUNT] };
     const jsonArgs = JSON.stringify(args);
 
     const result = await contract.evaluateTransaction(
