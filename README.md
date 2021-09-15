@@ -50,3 +50,7 @@ ACCOUNT=9261cabB98BFA4C09C069ce6CbAbc5f2696922F5
   ```zsh
   npm run balance
   ```
+- `Fee seting`
+  ```zsh
+  npm run fee
+  ```
