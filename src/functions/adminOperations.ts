@@ -12,7 +12,7 @@ import {
   setContractManagerOwner,
   setFee,
   setFeeCollector,
-} from "./adminOperations_ctor";
+} from "./ctors/adminOperations_ctor";
 import { rand } from "../utils/random";
 import { formatAddress } from "../utils/formatAddress";
 
