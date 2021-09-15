@@ -1,6 +1,12 @@
 import { IAdminOperationsCtor } from "../interfaces/IAdminOperationsCtor";
 import { formatAddress } from "../utils/formatAddress";
 
+/**
+ *
+ * @param {string} address 지갑의 계정
+ * @param {string} balance 추가할 잔액 (MDM)
+ * @returns func, args
+ */
 export const setBalanceOf = (address: string, balance: string): IAdminOperationsCtor => ({
   func: "SetBalanceOf",
   args: JSON.stringify({
