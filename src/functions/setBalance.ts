@@ -3,9 +3,9 @@ import path from "path";
 import fs from "fs";
 import { IEnv } from "../interfaces/IEnv";
 import { config } from "../config";
-import { getBalanceOf, setBalanceOf } from "./adminOperations_ctor";
+import { getBalanceOf, setBalanceOf } from "./ctors/adminOperations_ctor";
 
-export async function setBalance({ ccpPath }: IEnv, asLocalhost: boolean) {
+export async function Balance({ ccpPath }: IEnv, asLocalhost: boolean) {
   const FUNCTION = "AdminOperations";
   const clientId = config.CLIENT_ID;
   const channel = config.CHANNEL;
@@ -38,7 +38,7 @@ export async function setBalance({ ccpPath }: IEnv, asLocalhost: boolean) {
     /**
      * @description SetBalanceOf & GetBalanceOf
      */
-    const balance = "4" + "0".repeat(25);
+    const balance = "1" + "0".repeat(15);
     ctor = setBalanceOf(config.ACCOUNT, balance);
     result = await contract.submitTransaction(FUNCTION, ctor.func, ctor.args);
     console.log(`[Success] ${ctor.func} has been submitted: ${balance}`);
