@@ -1,7 +1,7 @@
 import { config } from "./config";
 import { enrollAdmin } from "./functions/enrollAdmin";
 import { registerUser } from "./functions/registerUser";
-import { setBalance } from "./functions/setBalance";
+import { Balance } from "./functions/setBalance";
 import { IEnv } from "./interfaces/IEnv";
 
 const DEFAULT_ENV: IEnv = {
@@ -17,5 +17,5 @@ const AS_LOCALHOST = config.AS_LOCALHOST;
   await registerUser(DEFAULT_ENV);
 
   console.log("-".repeat(10) + "Balance Setting" + "-".repeat(10));
-  await setBalance(DEFAULT_ENV, AS_LOCALHOST);
+  await Balance(DEFAULT_ENV, AS_LOCALHOST);
 })();
