@@ -1,6 +1,6 @@
 import { load } from "ts-dotenv";
 
-export const Env = load({
+export const config = load({
   CCP_PATH: String,
   MSP_ID: String,
   ADMIN_ID: String,

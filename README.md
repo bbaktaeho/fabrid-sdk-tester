@@ -36,10 +36,21 @@ ACCOUNT=9261cabB98BFA4C09C069ce6CbAbc5f2696922F5
 
 1. install packages
 
-    ```zsh
-    npm install
-    ```
+   ```zsh
+   npm install
+   ```
+
 2. run
-    ```zsh
-    npm run dev
-    ```
+
+- `AdminOperations`
+  ```zsh
+  npm run dev
+  ```
+- `Balance setting`
+  ```zsh
+  npm run balance
+  ```
+- `Fee seting`
+  ```zsh
+  npm run fee
+  ```

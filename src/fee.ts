@@ -1,7 +1,7 @@
 import { config } from "./config";
-import { AdminOperations } from "./functions/adminOperations";
 import { enrollAdmin } from "./functions/enrollAdmin";
 import { registerUser } from "./functions/registerUser";
+import { Fee } from "./functions/setFee";
 import { IEnv } from "./interfaces/IEnv";
 
 const DEFAULT_ENV: IEnv = {
@@ -16,6 +16,6 @@ const AS_LOCALHOST = config.AS_LOCALHOST;
   await enrollAdmin(DEFAULT_ENV);
   await registerUser(DEFAULT_ENV);
 
-  console.log("-".repeat(10) + "AdminOperations" + "-".repeat(10));
-  await AdminOperations(DEFAULT_ENV, AS_LOCALHOST);
+  console.log("-".repeat(10) + "Fee Setting" + "-".repeat(10));
+  await Fee(DEFAULT_ENV, AS_LOCALHOST);
 })();

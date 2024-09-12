@@ -3,32 +3,25 @@ import path from "path";
 import fs from "fs";
 import { IEnv } from "../interfaces/IEnv";
 import { config } from "../config";
-import { formatAddress } from "../utils/formatAddress";
+import { getBalanceOf, setBalanceOf } from "./ctors/adminOperations_ctor";
 
-export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
+export async function Balance({ ccpPath }: IEnv, asLocalhost: boolean) {
+  const FUNCTION = "AdminOperations";
   const clientId = config.CLIENT_ID;
   const channel = config.CHANNEL;
   const chaincodeName = config.CHAINCODE_NAME;
 
   try {
     const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
-
-    // Create a new file system based wallet for managing identities.
     const walletPath = path.join(process.cwd(), "wallet");
     const wallet = await Wallets.newFileSystemWallet(walletPath);
-    console.log(`Wallet path: ${walletPath}`);
-
-    // Check to see if we've already enrolled the user.
     const identity = await wallet.get(clientId);
     if (!identity) {
-      console.log(
-        'An identity for the user "appUser" does not exist in the wallet'
-      );
+      console.log(`An identity for the user "${clientId}" does not exist in the wallet`);
       console.log("Run the registerUser.ts application before retrying");
       return;
     }
 
-    // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
     await gateway.connect(ccp, {
       wallet,
@@ -36,28 +29,26 @@ export async function invoke({ ccpPath }: IEnv, asLocalhost: boolean) {
       discovery: { enabled: true, asLocalhost },
     });
 
-    // Get the network (channel) our contract is deployed to.
     const network = await gateway.getNetwork(channel);
-
-    // Get the contract from the network.
     const contract = network.getContract(chaincodeName);
 
-    const address = formatAddress(config.ACCOUNT);
-    // todo: your ctor of contract
-    const args = {
-      args: ["-", address, "1" + "0".repeat(21)],
-    };
-    const jsonArgs = JSON.stringify(args);
-    await contract.submitTransaction(
-      "AdminOperations",
-      "SetBalanceOf",
-      jsonArgs
-    );
+    let ctor;
+    let result;
 
-    console.log(`Transaction has been submitted`);
+    /**
+     * @description SetBalanceOf & GetBalanceOf
+     */
+    const balance = "1" + "0".repeat(15);
+    ctor = setBalanceOf(config.ACCOUNT, balance);
+    result = await contract.submitTransaction(FUNCTION, ctor.func, ctor.args);
+    console.log(`[Success] ${ctor.func} has been submitted: ${balance}`);
+    ctor = getBalanceOf(config.ACCOUNT);
+    result = await contract.evaluateTransaction(FUNCTION, ctor.func, ctor.args);
+    console.log(`[Success] ${ctor.func} has been evaluated: ${result.toString()}`);
+
     await gateway.disconnect();
   } catch (error) {
-    console.error(`Failed to submit transaction: ${error}`);
+    console.error(`Failed to ${FUNCTION} transaction: ${error}`);
     process.exit(1);
   }
 }

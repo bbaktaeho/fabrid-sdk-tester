@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "balance": "npx ts-node src/balance.ts",
+    "transaction": "npx ts-node ",
+    "fee": "npx ts-node src/fee.ts",
+    "feeCollector": "npx ts-node src/feeCollector.ts",
     "dev": "npx ts-node src/index.ts",
     "build": "npx tsc",
     "start": "node dist/index.js"
